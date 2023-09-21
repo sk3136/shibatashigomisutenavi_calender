@@ -3,42 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>新発田市ごみ捨てナビカレンダー（火木土）</title>
+<title>新発田市ごみ捨てナビカレンダー（火金）</title>
 <script>
     var now = new Date();
     var year = now.getFullYear();
     var month = now.getMonth() + 1;
     var date = now.getDate();
     var dayOfWeek = now.getDay();
-    var date_start = new Date(year, month - 1, 1);
-    var dayOfWeek_start = date_start.getDay();
     window.onload = function addOption() {
-        document.getElementById('month').textContent = month;
         // tableというidのついたテーブルを取得する
         let table = document.getElementById('table');
+        document.getElementById('month').textContent = month;
         for (var j = 0; j < 4; j++) {
             //行を追加する
             let newRow = table.insertRow();
-            // iに1週間分の日付を足す
             for (var i = 1 + j * 7; i < 8 + j * 7; i++) {
                 //セルを追加する
                 let newCell = newRow.insertCell();
-                if (dayOfWeek_start != 0) {
-                    let newText = document.createTextNode('　');
-                    newCell.appendChild(newText);
-                    // 前の月の食い込みが止まったとき（表示されていない月の最終日になったとき）
-                    if (dayOfWeek_start - 1 < i) {
-                        var minus = dayOfWeek_start;
-                        // 表示されていない月以降はelseのプログラムに行かせるために必要
-                        dayOfWeek_start = 0;
-                    }
-                } else {
-                    // 前の月から食い込んだ日付の分日付を減らす（これがないと最初の三日が前の月だった時水曜日の欄で日付が4になる）
-                    newText = document.createTextNode(i - minus);
-                    // セルにテキストを追加する
-                    newCell.appendChild(newText);
-                }
-                
+                let newText = document.createTextNode(i);
+                // セルにテキストを追加する
+                newCell.appendChild(newText);
             }
         }
     }
