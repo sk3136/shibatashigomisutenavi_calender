@@ -23,7 +23,7 @@ function moeru_b_3() {
     var date_now = 1;
     for (var i = 0; i < month_days_Number(month) + month_days_Number(month + 1); i++) {
         var dayOfWeek = new Date(year, month_now - 1, date_now).getDay();
-        if (i == month_days_Number(month) + 1) {
+        if (i == month_days_Number(month)) {
             if (month_now + 1 >= 13) {
                 year++
                 month_now = month_now - 11;

@@ -9,11 +9,6 @@
     var now = new Date();
     // 現在の年を取得
     var year = now.getFullYear();
-    // 変数monthにnowから月のデータを取って入れる（1月が0から始まっているから1を足す）
-    var month = now.getMonth() + 1;
-    var date = now.getDate();
-    var dayOfWeek = now.getDay();
-    var answerDates = [];
 
     function month_days_Number(month_now) {
         if (month_now == 1 || month_now == 3 || month_now == 5 || month_now == 7 || month_now == 8 || month_now == 10 || month_now == 12 || month_now == 13) {
@@ -34,9 +29,11 @@
             calendar = document.getElementById('calendar_2');
         }
 
+        var date = now.getDate();
         var first_dayOfWeek = new Date(year, calendar_month - 1, 1).getDay();
         var last_day = month_days_Number(calendar_month);
         var calendar_date = 1 - first_dayOfWeek;
+        var month_and_date = '';
         
         while (calendar_date <= last_day) {
             // カレンダーの行を追加する
@@ -47,14 +44,25 @@
                 // セルのテキストの数値が1以上かつ選択した月の日数以下なら
                 if (calendar_date >= 1 && calendar_date <= last_day) {
                     if (calendar_month <= 3) {
-                        Number(calendar_month + 12) + '/' + calendar_date;
+                        month_and_date = Number(calendar_month + 12) + '/' + calendar_date;
                     } else {
-                        calendar_month + '/' + calendar_date;
+                        month_and_date = calendar_month + '/' + calendar_date;
                     }
                     
                     if (date == calendar_date && calendar_number == 0) {
                         newCell.setAttribute('class','red');
                     }
+
+                    if (date < calendar_date && calendar_number == 0 || calendar_number == 1) {
+                        for (var j = 0; j < possible_Calendar.length; j++) {
+                            for (var n = 0; n < possible_Calendar[j].length; n++) {
+                                if (possible_Calendar[j][n] == month_and_date) {
+                                    newCell.setAttribute('class','blue');
+                                }
+                            }
+                        }
+                    }
+                    
                     let newText = document.createTextNode(calendar_date);
                     // カレンダーのセルにテキストを入れる
                     newCell.appendChild(newText);
@@ -64,7 +72,7 @@
         }
     }
     
-    // このプログラムを開いたときに実行する
+    var month = now.getMonth() + 1;
     window.onload = function() {
         var div_select = document.getElementById('select');
         div_select.style.display = 'block';
@@ -163,13 +171,6 @@
         }
 
         selected_area.options[0].selected = true;
-        // Id moenaiをにanswerDatesの0番に書き換える
-        document.getElementById('moenai').textContent = answerDates[0];
-        document.getElementById('akikan').textContent = answerDates[1];
-        document.getElementById('happou').textContent = answerDates[2];
-        document.getElementById('furununo').textContent = answerDates[3];
-        document.getElementById('sinbun').textContent = answerDates[4];
-        document.getElementById('akibin').textContent = answerDates[5];
     }
 
     function onemore() {
@@ -177,6 +178,15 @@
         div_select.style.display = 'block';
         var div_result = document.getElementById('result');
         div_result.style.display = 'none';
+
+        var calendar = document.getElementById('calendar');
+        var calendar_2 = document.getElementById('calendar_2');
+        for (var i = calendar.rows.length - 1; i >= 1; i--) {
+            calendar.deleteRow(i);
+        }
+        for (var i = calendar_2.rows.length - 1; i >= 1; i--) {
+            calendar_2.deleteRow(i);
+        }
     }
 </script>
 <script type="text/javascript" src="a_1.js"></script>
@@ -253,6 +263,9 @@ button {
 }
 .red {
     background-color: #ff0000;
+}
+.blue {
+    background-color: #2b00ff;
 }
 </style>
 </head>

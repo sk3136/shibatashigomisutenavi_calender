@@ -23,7 +23,7 @@ function moeru_s_18() {
     var date_now = 1;
     for (var i = 0; i < month_days_Number(month) + month_days_Number(month + 1); i++) {
         var dayOfWeek = new Date(year, month_now - 1, date_now).getDay();
-        if (i == month_days_Number(month) + 1) {
+        if (i == month_days_Number(month)) {
             if (month_now + 1 >= 13) {
                 year++
                 month_now = month_now - 11;
@@ -42,11 +42,4 @@ function moeru_s_18() {
         }
         date_now++;
     }
-
-    document.getElementById('title_4').textContent = '雑誌類';
-    document.getElementById('title_5').textContent = '段ボール、空きびん、発泡スチロール';
-    document.getElementById('title_5').setAttribute('class','long_title');
-    document.getElementById('title_6').textContent = '新聞';
-    document.getElementById('title_6').setAttribute('class','');
-    document.getElementById('title_7').textContent = '古布';
 }
