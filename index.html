@@ -4,27 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>新発田市ごみ捨てナビカレンダー</title>
-<script type="text/javascript" src="a_1.js"></script>
-<script type="text/javascript" src="a_2.js"></script>
-<script type="text/javascript" src="b_3.js"></script>
-<script type="text/javascript" src="c_4.js"></script>
-<script type="text/javascript" src="c_5.js"></script>
-<script type="text/javascript" src="d_6.js"></script>
-<script type="text/javascript" src="d_6_2.js"></script>
-<script type="text/javascript" src="e_7.js"></script>
-<script type="text/javascript" src="e_8.js"></script>
-<script type="text/javascript" src="f_9.js"></script>
-<script type="text/javascript" src="g_10.js"></script>
-<script type="text/javascript" src="g_11.js"></script>
-<script type="text/javascript" src="h_12.js"></script>
-<script type="text/javascript" src="h_12_2.js"></script>
-<script type="text/javascript" src="t_13.js"></script>
-<script type="text/javascript" src="t_14.js"></script>
-<script type="text/javascript" src="k_15.js"></script>
-<script type="text/javascript" src="k_16.js"></script>
-<script type="text/javascript" src="k_16_2.js"></script>
-<script type="text/javascript" src="s_17.js"></script>
-<script type="text/javascript" src="s_18.js"></script>
+<script type="text/javascript" src="kyuushibata.js"></script>
+<script type="text/javascript" src="toyoura.js"></script>
 <script>
     // 変数nowに現在の年月日データを入れる
     var now = new Date();
@@ -56,7 +37,7 @@
         var calendar_month = month;
         var calendar_date = date;
 
-        for (var i = 1; i < 15; i++) {
+        for (var i = 1; i < 16; i++) {
             // テーブルの行を追加する
             let newRow = calendar.insertRow();
             // テーブルの一つ目(左)のセルを追加する
@@ -110,11 +91,13 @@
         }
     }
 
+    var impossible_date = [];
     function moeru(first, second, third) {
         var year_now = year;
         var month_now = month;
         var date_now = date;
-        for (var i = 0; i < 15; i++) {
+        possible_Calendar[0] = [];
+        for (var i = 0; i < 16; i++) {
             var dayOfWeek = new Date(year_now, month_now - 1, date_now).getDay();
             if (date_now == month_days_Number(month) + 1) {
                 if (month_now + 1 >= 13) {
@@ -125,27 +108,34 @@
                 }
                 date_now = 1;
             }
-            if (month_now == 4 && date_now == 27 || month_now == 4 && date_now == 28) {
-            } else if (dayOfWeek == first || dayOfWeek == second || dayOfWeek == third) {
+            
+            var candidate = '';
+            if (dayOfWeek == first || dayOfWeek == second || dayOfWeek == third) {
                 if (month_now <= 3) {
                     if (String(date_now).length == 1) {
-                        possible_Calendar[0].push(String(Number(month_now + 12)) + '0' + String(date_now));
+                        candidate = String(Number(month_now + 12)) + '0' + String(date_now);
                     } else {
-                        possible_Calendar[0].push(String(Number(month_now + 12)) + String(date_now));
+                        candidate = String(Number(month_now + 12)) + String(date_now);
                     }
                 } else {
                     if (String(month_now).length == 1 && String(date_now).length == 1) {
-                        possible_Calendar[0].push('0' + String(month_now) + '0' + String(date_now));
+                        candidate = '0' + String(month_now) + '0' + String(date_now);
                     } else if (String(month_now).length == 2 && String(date_now).length == 1) {
-                        possible_Calendar[0].push(String(month_now) + '0' + String(date_now));
+                        candidate = String(month_now) + '0' + String(date_now);
                     } else if (String(month_now).length == 1 && String(date_now).length == 2) {
-                        possible_Calendar[0].push('0' + String(month_now) + String(date_now));
+                        candidate = '0' + String(month_now) + String(date_now);
                     } if (String(month_now).length == 2 && String(date_now).length == 2) {
-                        possible_Calendar[0].push(String(month_now) + String(date_now));
+                        candidate = String(month_now) + String(date_now);
                     }
                 }
             }
+            for (var n = 0; n < impossible_date.length; n++) {
+                if (impossible_date[n] == candidate) {
+                    candidate = '';
+                }
+            }
             date_now++;
+            possible_Calendar[0].push(candidate);
         }
     }
 
@@ -154,7 +144,7 @@
         div_select.style.display = 'block';
         var div_result = document.getElementById('result');
         div_result.style.display = 'none';
-        if (month != 1 && month != 2 && month != 3) {
+        if (month > 3) {
             document.getElementById('now_version_select').textContent = year + '年4月～' + Number(year + 1) + '年3月';
             document.getElementById('now_version_result').textContent = year + '年4月～' + Number(year + 1) + '年3月';
         } else {
@@ -173,67 +163,88 @@
 
         if (selected_area.value == 'a_1') {
             possible_Calendar = Calendar_a_1;
+            impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'a_2') {
             possible_Calendar = Calendar_a_2;
+            impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'b_3') {
             possible_Calendar = Calendar_b_3;
+            impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'c_4') {
             possible_Calendar = Calendar_c_4;
+            impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'c_5') {
             possible_Calendar = Calendar_c_5;
+            impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'd_6') {
             possible_Calendar = Calendar_d_6;
+            impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'd_6_2') {
             possible_Calendar = Calendar_d_6_2;
+            impossible_date = [];
             moeru(2, 5, );
         } else if (selected_area.value == 'e_7') {
             possible_Calendar = Calendar_e_7;
+            impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'e_8') {
             possible_Calendar = Calendar_e_8;
+            impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'f_9') {
             possible_Calendar = Calendar_f_9;
+            impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'g_10') {
             possible_Calendar = Calendar_g_10;
+            impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'g_11') {
             possible_Calendar = Calendar_g_11;
+            impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'h_12') {
             possible_Calendar = Calendar_h_12;
+            impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'h_12_2') {
             possible_Calendar = Calendar_h_12_2;
+            impossible_date = [];
             moeru(2, 5, );
         } else if (selected_area.value == 't_13') {
             possible_Calendar = Calendar_t_13;
+            impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 't_14') {
             possible_Calendar = Calendar_t_14;
+            impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'k_15') {
             possible_Calendar = Calendar_k_15;
+            impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'k_16') {
             possible_Calendar = Calendar_k_16;
+            impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'k_16_2') {
             possible_Calendar = Calendar_k_16_2;
+            impossible_date = [];
             moeru(2, 5, );
         } else if (selected_area.value == 's_17') {
             possible_Calendar = Calendar_s_17;
+            impossible_date = [];
             moeru(1, 3, 5);
             trash_kind = ['燃えるごみ','燃えないごみ','空き缶類','雑誌類','段ボール','空きびん、新聞、発泡スチロール','古布'];
         } else if (selected_area.value == 's_18') {
             possible_Calendar = Calendar_s_18;
+            impossible_date = [];
             moeru(1, 3, 5);
             trash_kind = ['燃えるごみ','燃えないごみ','空き缶類','雑誌類','空きびん、段ボール、発泡スチロール','新聞','古布'];
         }
@@ -250,7 +261,7 @@
         div_result.style.display = 'none';
 
         var calendar = document.getElementById('calendar');
-        for (var i = calendar.rows.length - 1; i >= 1; i--) {
+        for (var i = calendar.rows.length - 1; i >= 0; i--) {
             calendar.deleteRow(i);
         }
     }
