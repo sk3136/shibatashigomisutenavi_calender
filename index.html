@@ -11,6 +11,7 @@
     var now = new Date();
     // 現在の年を取得
     var year = now.getFullYear();
+    var syukujitu = [year + '/1/1', year + '/1/2', year + '/1/8', year + '/2/11', year + '/2/12', year + '/2/23', year + '/3/20', year + '/4/29', year + '/5/3', year + '/5/4', year + '/5/5', year + '/5/6', year + '/7/15', year + '/8/11', year + '/8/12', year + '/9/16', year + '/9/22', year + '/9/23', year + '/10/14', year + '/11/3', year + '/11/4', year + '/11/23', year + '/12/31', Number(year + 1) + '/1/1', Number(year + 1) + '/1/2', Number(year + 1) + '/1/13', Number(year + 1) + '/2/11', Number(year + 1) + '/2/23', Number(year + 1) + '/2/24', Number(year + 1) + '/3/20', Number(year + 1) + '/4/29', Number(year + 1) + '/5/3', Number(year + 1) + '/5/4', Number(year + 1) + '/5/5', Number(year + 1) + '/5/6', Number(year + 1) + '/7/21', Number(year + 1) + '/8/11', Number(year + 1) + '/9/15', Number(year + 1) + '/9/23', Number(year + 1) + '/10/13', Number(year + 1) + '/11/3', Number(year + 1) + '/11/23', Number(year + 1) + '/11/24', Number(year + 1) + '/12/31'];
 
     function month_days_Number(month_now) {
         if (month_now == 1 || month_now == 3 || month_now == 5 || month_now == 7 || month_now == 8 || month_now == 10 || month_now == 12) {
@@ -38,12 +39,6 @@
         var calendar_date = date;
 
         for (var i = 1; i < 16; i++) {
-            // テーブルの行を追加する
-            let newRow = calendar.insertRow();
-            // テーブルの一つ目(左)のセルを追加する
-            let newCell = newRow.insertCell();
-            // テーブル二つ目(右)のセルを追加する
-            let newCell_2 = newRow.insertCell();
             if (calendar_date > last_day) {
                 calendar_date = 1;
                 if (month + 1 == 13) {
@@ -51,8 +46,19 @@
                     calendar_month = calendar_month - 11;
                 } else {
                     calendar_month++
+                    if (calendar_month == 4) {
+                        break;
+                    }
                 }
             }
+
+            // テーブルの行を追加する
+            let newRow = calendar.insertRow();
+            // テーブルの一つ目(左)のセルを追加する
+            let newCell = newRow.insertCell();
+            // テーブル二つ目(右)のセルを追加する
+            let newCell_2 = newRow.insertCell();
+
             var month_and_date = String('');
             if (calendar_month <= 3) {
                 if (String(calendar_date).length == 1) {
@@ -71,22 +77,36 @@
                     month_and_date = String(calendar_month) + String(calendar_date);
                 }
             }
+            
             var dayOfWeek_now = new Date(calendar_year, calendar_month - 1, calendar_date).getDay();
             // セルの日付の曜日を漢字に直す
             var dayOfWeek_indication = '(' + dayOfWeek_kanji[dayOfWeek_now] + ')';
             // 日付と曜日の文字列を作る
-            let newText = document.createTextNode(calendar_date + dayOfWeek_indication);
-            var contents = [];
+            let newText = document.createTextNode(calendar_date + ' ' + dayOfWeek_indication);
             for (var j = 0; j < possible_Calendar.length; j++) {
                 for (var l = 0; l < possible_Calendar[j].length; l++) {
                     if (month_and_date == possible_Calendar[j][l]) {
-                        contents.push(trash_kind[j]);
+                        var p = document.createElement("p");
+                        var text = document.createTextNode(trash_kind[j]);
+                        p.appendChild(text);
+                        newCell_2.appendChild(p);
                     }
                 }
             }
-            let newText_2 = document.createTextNode(contents);
+
+            for (var s = 0; s < syukujitu.length; s++) {
+                var now_date = calendar_year + '/' + calendar_month + '/' + calendar_date;
+                if (syukujitu[s] == now_date) {
+                    newCell.setAttribute('class','sunday');
+                }
+            }
+
+            if (dayOfWeek_now == 6) {
+                newCell.setAttribute('class','saturday');
+            } else if (dayOfWeek_now == 0) {
+                newCell.setAttribute('class','sunday');
+            }
             newCell.appendChild(newText);
-            newCell_2.appendChild(newText_2);
             calendar_date++;
         }
     }
@@ -315,6 +335,12 @@ button {
 }
 .long_title {
     font-size: 15px;
+}
+.saturday {
+    background-color: #d1e5ff;
+}
+.sunday {
+    background-color: #fec3c3;
 }
 </style>
 </head>
