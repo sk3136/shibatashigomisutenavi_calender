@@ -111,7 +111,10 @@
         }
     }
 
+    // 燃えるごみのなしになっている日付
     var impossible_date = [];
+    // 燃えるごみの回収日の曜日が基本の曜日ではない日付
+    var moeru_possible_date = [];
     function moeru(first, second, third) {
         var year_now = year;
         var month_now = month;
@@ -157,6 +160,7 @@
             date_now++;
             possible_Calendar[0].push(candidate);
         }
+        possible_Calendar[0].push(moeru_possible_date);
     }
 
     window.onload = function() {
@@ -183,87 +187,108 @@
 
         if (selected_area.value == 'a_1') {
             possible_Calendar = Calendar_a_1;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'a_2') {
             possible_Calendar = Calendar_a_2;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'b_3') {
             possible_Calendar = Calendar_b_3;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'c_4') {
             possible_Calendar = Calendar_c_4;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'c_5') {
             possible_Calendar = Calendar_c_5;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'd_6') {
             possible_Calendar = Calendar_d_6;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'd_6_2') {
             possible_Calendar = Calendar_d_6_2;
-            impossible_date = [];
+            moeru_possible_date = ['1230','1304','1410'];
+            impossible_date = ['1231','1303','1411'];
             moeru(2, 5, );
         } else if (selected_area.value == 'e_7') {
             possible_Calendar = Calendar_e_7;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'e_8') {
             possible_Calendar = Calendar_e_8;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'f_9') {
             possible_Calendar = Calendar_f_9;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'g_10') {
             possible_Calendar = Calendar_g_10;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'g_11') {
             possible_Calendar = Calendar_g_11;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'h_12') {
             possible_Calendar = Calendar_h_12;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'h_12_2') {
             possible_Calendar = Calendar_h_12_2;
-            impossible_date = [];
+            moeru_possible_date = ['1230','1304','1410'];
+            impossible_date = ['1231','1303','1411'];
             moeru(2, 5, );
         } else if (selected_area.value == 't_13') {
             possible_Calendar = Calendar_t_13;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 't_14') {
             possible_Calendar = Calendar_t_14;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'k_15') {
             possible_Calendar = Calendar_k_15;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
         } else if (selected_area.value == 'k_16') {
             possible_Calendar = Calendar_k_16;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(2, 4, 6);
         } else if (selected_area.value == 'k_16_2') {
             possible_Calendar = Calendar_k_16_2;
-            impossible_date = [];
+            moeru_possible_date = ['1230','1304','1410'];
+            impossible_date = ['1231','1303','1411'];
             moeru(2, 5, );
         } else if (selected_area.value == 's_17') {
             possible_Calendar = Calendar_s_17;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
             trash_kind = ['燃えるごみ','燃えないごみ','空き缶類','雑誌類','段ボール','空きびん、新聞、発泡スチロール','古布'];
         } else if (selected_area.value == 's_18') {
             possible_Calendar = Calendar_s_18;
+            moeru_possible_date = [];
             impossible_date = [];
             moeru(1, 3, 5);
             trash_kind = ['燃えるごみ','燃えないごみ','空き缶類','雑誌類','空きびん、段ボール、発泡スチロール','新聞','古布'];
@@ -308,6 +333,7 @@ table {
     font-size: 20px;
     margin: 10px auto;
     border-collapse: collapse;
+    width: 250px;
 }
 th {
     border:1px rgb(158, 158, 158) solid;
@@ -636,6 +662,7 @@ button {
 <div id="result">
 <h1>新発田市<br><a id="title"></a><br>ごみ捨てナビ</h1>
 <p><a id="now_version_result"></p>
+<p>収集日の午前8時30分までに<br>ごみステーションへ出してください。</p>
 <p><a id="month"></a>月</p>
 <table id="calendar">
     <tr>
