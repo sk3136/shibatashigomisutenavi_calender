@@ -25,6 +25,26 @@
         }
     }
 
+    function date_number_make(month_now, date_now) {
+        if (month_now <= 3) {
+            if (String(date_now).length == 1) {
+                return String(Number(month_now + 12)) + '0' + String(date_now);
+            } else {
+                return String(Number(month_now + 12)) + String(date_now);
+            }
+        } else {
+            if (String(month_now).length == 1 && String(date_now).length == 1) {
+                return '0' + String(month_now) + '0' + String(date_now);
+            } else if (String(month_now).length == 2 && String(date_now).length == 1) {
+                return String(month_now) + '0' + String(date_now);
+            } else if (String(month_now).length == 1 && String(date_now).length == 2) {
+                return '0' + String(month_now) + String(date_now);
+            } if (String(month_now).length == 2 && String(date_now).length == 2) {
+                return String(month_now) + String(date_now);
+            }
+        }
+    }
+
     var month = now.getMonth() + 1;
     var date = now.getDate();
     var trash_kind = ['燃えるごみ','燃えないごみ','空き缶類','発泡スチロール','古布','新聞、段ボール、雑誌、チラシ','空きびん'];
@@ -58,26 +78,7 @@
             let newCell = newRow.insertCell();
             // テーブル二つ目(右)のセルを追加する
             let newCell_2 = newRow.insertCell();
-
-            var month_and_date = String('');
-            if (calendar_month <= 3) {
-                if (String(calendar_date).length == 1) {
-                    month_and_date = String(Number(calendar_month + 12)) + '0' + String(calendar_date);
-                } else {
-                    month_and_date = String(Number(calendar_month + 12)) + String(calendar_date);
-                }
-            } else {
-                if (String(calendar_month).length == 1 && String(calendar_date).length == 1) {
-                    month_and_date = '0' + String(calendar_month) + '0' + String(calendar_date);
-                } else if (String(calendar_month).length == 2 && String(calendar_date).length == 1) {
-                    month_and_date = String(calendar_month) + '0' + String(calendar_date);
-                } else if (String(calendar_month).length == 1 && String(calendar_date).length == 2) {
-                    month_and_date = '0' + String(calendar_month) + String(calendar_date);
-                } if (String(calendar_month).length == 2 && String(calendar_date).length == 2) {
-                    month_and_date = String(calendar_month) + String(calendar_date);
-                }
-            }
-            
+            var month_and_date = date_number_make(calendar_month, calendar_date);
             var dayOfWeek_now = new Date(calendar_year, calendar_month - 1, calendar_date).getDay();
             // セルの日付の曜日を漢字に直す
             var dayOfWeek_indication = '(' + dayOfWeek_kanji[dayOfWeek_now] + ')';
@@ -134,23 +135,7 @@
             
             var candidate = '';
             if (dayOfWeek == first || dayOfWeek == second || dayOfWeek == third) {
-                if (month_now <= 3) {
-                    if (String(date_now).length == 1) {
-                        candidate = String(Number(month_now + 12)) + '0' + String(date_now);
-                    } else {
-                        candidate = String(Number(month_now + 12)) + String(date_now);
-                    }
-                } else {
-                    if (String(month_now).length == 1 && String(date_now).length == 1) {
-                        candidate = '0' + String(month_now) + '0' + String(date_now);
-                    } else if (String(month_now).length == 2 && String(date_now).length == 1) {
-                        candidate = String(month_now) + '0' + String(date_now);
-                    } else if (String(month_now).length == 1 && String(date_now).length == 2) {
-                        candidate = '0' + String(month_now) + String(date_now);
-                    } if (String(month_now).length == 2 && String(date_now).length == 2) {
-                        candidate = String(month_now) + String(date_now);
-                    }
-                }
+                candidate = date_number_make(month_now, date_now);
             }
             for (var n = 0; n < impossible_date.length; n++) {
                 if (impossible_date[n] == candidate) {
