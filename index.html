@@ -11,7 +11,7 @@
     var now = new Date();
     // 現在の年を取得
     var year = now.getFullYear();
-    var syukujitu = [year + '/1/1', year + '/1/2', year + '/1/8', year + '/2/11', year + '/2/12', year + '/2/23', year + '/3/20', year + '/4/29', year + '/5/3', year + '/5/4', year + '/5/5', year + '/5/6', year + '/7/15', year + '/8/11', year + '/8/12', year + '/9/16', year + '/9/22', year + '/9/23', year + '/10/14', year + '/11/3', year + '/11/4', year + '/11/23', year + '/12/31', Number(year + 1) + '/1/1', Number(year + 1) + '/1/2', Number(year + 1) + '/1/13', Number(year + 1) + '/2/11', Number(year + 1) + '/2/23', Number(year + 1) + '/2/24', Number(year + 1) + '/3/20', Number(year + 1) + '/4/29', Number(year + 1) + '/5/3', Number(year + 1) + '/5/4', Number(year + 1) + '/5/5', Number(year + 1) + '/5/6', Number(year + 1) + '/7/21', Number(year + 1) + '/8/11', Number(year + 1) + '/9/15', Number(year + 1) + '/9/23', Number(year + 1) + '/10/13', Number(year + 1) + '/11/3', Number(year + 1) + '/11/23', Number(year + 1) + '/11/24', Number(year + 1) + '/12/31'];
+    var syukujitu = ['4/29', '5/3', '5/4', '5/5', '5/6', '7/15', '8/11', '8/12', '9/16', '9/22', '9/23', '10/14', '11/3', '11/4', '11/23', '12/30', '12/31', '1/1', '1/2', '1/3', '1/13', '2/11', '2/23', '2/24', '3/20'];
 
     function month_days_Number(month_now) {
         if (month_now == 1 || month_now == 3 || month_now == 5 || month_now == 7 || month_now == 8 || month_now == 10 || month_now == 12) {
@@ -82,8 +82,14 @@
             var dayOfWeek_now = new Date(calendar_year, calendar_month - 1, calendar_date).getDay();
             // セルの日付の曜日を漢字に直す
             var dayOfWeek_indication = '(' + dayOfWeek_kanji[dayOfWeek_now] + ')';
-            // 日付と曜日の文字列を作る
-            let newText = document.createTextNode(calendar_date + ' ' + dayOfWeek_indication);
+            var date_indication = [calendar_month + '/' + calendar_date, dayOfWeek_indication];
+            for (var j = 0; j < 2; j++) {
+                var p = document.createElement("p");
+                var text = document.createTextNode(date_indication[j]);
+                p.appendChild(text);
+                newCell.appendChild(p);
+            }
+
             for (var j = 0; j < possible_Calendar.length; j++) {
                 for (var l = 0; l < possible_Calendar[j].length; l++) {
                     if (month_and_date == possible_Calendar[j][l]) {
@@ -96,7 +102,7 @@
             }
 
             for (var s = 0; s < syukujitu.length; s++) {
-                var now_date = calendar_year + '/' + calendar_month + '/' + calendar_date;
+                var now_date = calendar_month + '/' + calendar_date;
                 if (syukujitu[s] == now_date) {
                     newCell.setAttribute('class','sunday');
                 }
@@ -107,7 +113,6 @@
             } else if (dayOfWeek_now == 0) {
                 newCell.setAttribute('class','sunday');
             }
-            newCell.appendChild(newText);
             calendar_date++;
         }
     }
@@ -180,7 +185,6 @@
         div_select.style.display = 'none';
         var div_result = document.getElementById('result');
         div_result.style.display = 'block';
-        document.getElementById('month').textContent = month;
 
         if (selected_area.value == 'a_1') {
             possible_Calendar = Calendar_a_1;
@@ -318,8 +322,10 @@
                 }
             }
             if (table.rows.length == 1) {
-                document.getElementById('none').textContent = '市のホームページを参照してください。';
+                document.getElementById('homepage').textContent = '市のホームページを参照してください。';
+                document.getElementById('none').textContent = 'はありませんでした。';
             } else {
+                document.getElementById('homepage').textContent = '';
                 document.getElementById('none').textContent = '';
             }
         }
@@ -689,7 +695,6 @@ input {
 <h1><a id="title"></a><br>ごみ捨てナビ</h1>
 <p><a id="now_version_result"></p>
 <p>収集日の午前8時30分までに<br>ごみステーションへ出してください。</p>
-<p><a id="month"></a>月</p>
 <table id="calendar">
     <tr>
     </tr>
@@ -702,14 +707,14 @@ input {
 <button onclick="trash_kind_search()">検索</button>
 <p><a href="https://www.city.shibata.lg.jp/kurashi/gomi/gomi/1019342.html">一覧表はこちらから</a></p>
 <div id="search_result">
-    <p>「<a id="include_search"></a>」を含む検索結果<br>青色のゴミの名前を押すと出し方の注意事項が表示されます</p>
+    <p>「<a id="include_search"></a>」を含む検索結果<a id="none"></a><br>青色のゴミの名前を押すと出し方の注意事項が表示されます</p>
+    <a id="homepage" href="https://www.city.shibata.lg.jp/kurashi/gomi/gomi/1019342.html"></a>
     <table id="trash_search">
         <tr>
             <th>品目</th>
             <th>分別</th>
         </tr>
     </table>
-    <a id="none" href="https://www.city.shibata.lg.jp/kurashi/gomi/gomi/1019342.html"></a>
 </div>
 </body>
 </html>
