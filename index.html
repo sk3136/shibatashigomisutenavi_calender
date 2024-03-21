@@ -89,7 +89,6 @@
                 p.appendChild(text);
                 newCell.appendChild(p);
             }
-
             for (var j = 0; j < possible_Calendar.length; j++) {
                 for (var l = 0; l < possible_Calendar[j].length; l++) {
                     if (month_and_date == possible_Calendar[j][l]) {
@@ -100,18 +99,18 @@
                     }
                 }
             }
-
+            
+            if (dayOfWeek_now == 6) {
+                newCell.setAttribute('class','saturday');
+            } else if (dayOfWeek_now == 0) {
+                newCell.setAttribute('class','sunday');
+            }
+            
             for (var s = 0; s < syukujitu.length; s++) {
                 var now_date = calendar_month + '/' + calendar_date;
                 if (syukujitu[s] == now_date) {
                     newCell.setAttribute('class','sunday');
                 }
-            }
-
-            if (dayOfWeek_now == 6) {
-                newCell.setAttribute('class','saturday');
-            } else if (dayOfWeek_now == 0) {
-                newCell.setAttribute('class','sunday');
             }
             calendar_date++;
         }
@@ -136,7 +135,9 @@
             moeru_possible_date = ['1230','1304','1410'];
             impossible_date = ['1231','1303','1411'];
         }
-        possible_Calendar[0].push(moeru_possible_date);
+        for (var n = 0; n < moeru_possible_date.length; n++) {
+            possible_Calendar[0].push(moeru_possible_date[n]);
+        }
         for (var i = 0; i < 16; i++) {
             var dayOfWeek = new Date(year_now, month_now - 1, date_now).getDay();
             if (date_now == month_days_Number(month) + 1) {
@@ -291,6 +292,7 @@
                 table.deleteRow(i);
             }
             
+            var table_rows = -1;
             var search_result = document.getElementById('search_result');
             search_result.style.display = 'block';
             document.getElementById('include_search').textContent = search_word;
@@ -301,20 +303,23 @@
                     let newRow = table.insertRow();
                     let newCell = newRow.insertCell();
                     let newCell_2 = newRow.insertCell();
+                    newCell.style.width = '190px';
+                    newCell_2.style.width = '110px';
                     var text = document.createTextNode(trash_kind_list_1[i]);
                     var text_2 = document.createTextNode(trash_kind_list_2[i]);
-                    
-                    newCell.setAttribute('id',trash_kind_list_3[i]);
-                    if (trash_kind_list_2[i] == '家電4品目') {
-                        newCell.setAttribute('id','市のホームページを参照してください。');
-                        newCell.setAttribute('class','link');
+
+                    newCell.setAttribute('id',i);
+                    if (table_rows == -1) {
+                        table_rows = i;
                     }
-                    if (trash_kind_list_3[i] != '') {
+                    if (trash_kind_list_2[i] == '家電4品目' || trash_kind_list_3[i] != '') {
                         newCell.setAttribute('class','link');
                     }
                     newCell.onclick = function() {
-                        if (this.id != '') {
-                            alert(this.id);
+                        if (trash_kind_list_3[this.id] != '') {
+                            alert(trash_kind_list_3[this.id]);
+                        } else if (trash_kind_list_2[this.id] == '家電4品目') {
+                            alert('市のホームページを参照してください。');
                         }
                     }
                     newCell.appendChild(text);
@@ -330,6 +335,11 @@
                 document.getElementById('search_detail').style.display = 'block';
                 document.getElementById('trash_search').style.display = 'block';
             }
+            var scroll = document.getElementById(table_rows);
+            scroll.scrollIntoView({
+                block: 'end',
+                behavior: 'smooth'
+            });
         }
         document.getElementById('trash_kind_search').value = '';
     }
