@@ -7,11 +7,14 @@
 <script type="text/javascript" src="kyuushibata.js"></script>
 <script type="text/javascript" src="toyoura.js"></script>
 <script>
+    // 年ごとに「syukujitu」と「moeru_possible_date」と「impossible_date」の日付を変更する(2025　syukujituのみ完了)
+
     // 変数nowに現在の年月日データを入れる
     var now = new Date();
     // 現在の年を取得
     var year = now.getFullYear();
-    var syukujitu = ['4/29', '5/3', '5/4', '5/5', '5/6', '7/15', '8/11', '8/12', '9/16', '9/22', '9/23', '10/14', '11/3', '11/4', '11/23', '12/30', '12/31', '1/1', '1/2', '1/3', '1/13', '2/11', '2/23', '2/24', '3/20'];
+    // '12/30', '12/31', '1/1', '1/2', '1/3'は新発田市のカレンダーと合わせるためにつけてある
+    var syukujitu = ['4/29', '5/3', '5/4', '5/5', '5/6', '7/21', '8/11', '9/15', '9/23', '10/13', '11/3', '11/23', '11/24', '12/30', '12/31', '1/1', '1/2', '1/3', '1/12', '2/11', '2/23', '3/20'];
 
     function month_days_Number(month_now) {
         if (month_now == 1 || month_now == 3 || month_now == 5 || month_now == 7 || month_now == 8 || month_now == 10 || month_now == 12) {
@@ -121,10 +124,10 @@
         var month_now = month;
         var date_now = date;
         possible_Calendar[0] = [];
-        // 燃えるごみのなしになっている日付
-        var impossible_date = [];
         // 燃えるごみの回収日の曜日が基本の曜日ではない日付
         var moeru_possible_date = [];
+        // 燃えるごみのなしになっている日付
+        var impossible_date = [];
         if (first == 1 && second == 3 && third == 5) {
             moeru_possible_date = [];
             impossible_date = ['0429','1301','1303'];
@@ -169,8 +172,6 @@
         div_select.style.display = 'block';
         var div_result = document.getElementById('result');
         div_result.style.display = 'none';
-        var search_result = document.getElementById('search_result');
-        search_result.style.display = 'none';
         if (month > 3) {
             document.getElementById('now_version_select').textContent = year + '年4月～' + Number(year + 1) + '年3月';
             document.getElementById('now_version_result').textContent = year + '年4月～' + Number(year + 1) + '年3月';
@@ -270,79 +271,6 @@
             calendar.deleteRow(i);
         }
     }
-
-    function kanaToHira(search_word) {
-        // 文字列からカタカナを検索し
-        // replaceは置換をする命令　例　変数.replace(対象の文字, 置換する文字)　\u30a1-\u30f6はカタカナの正規表現で-は～の意味（ァ～ヶ）　[]は中の文字と一致するなら　gは正規表現の後につけると複数の文字列（変数の中身全ての文字列）に置換を適用できるgが無いと最初の文字列で置換が終わる
-        return search_word.replace(/[\u30a1-\u30f6]/g, function(match) {
-            // 見つけたカタカナの文字コードをひらがなの文字コードに変換し
-            // match.charCodeAt(0)は/[\u30a1-\u30f6]/gで該当した文字のコード　- 0x60は文字コードを変えてカタカナの文字コードをひらがなの文字コードに変換する
-            var chr = match.charCodeAt(0) - 0x60;
-            // 文字コードを文字列に直す
-            // String.fromCharCodeは文字コードを文字列に直す
-            return String.fromCharCode(chr);
-        });
-    }
-
-    function trash_kind_search() {
-        var search_word = document.getElementById('trash_kind_search').value;
-        if (search_word.trim().length != 0) {
-            var table = document.getElementById('trash_search');
-            for (var i = table.rows.length - 1; i >= 1; i--) {
-                table.deleteRow(i);
-            }
-            
-            var table_rows = -1;
-            var search_result = document.getElementById('search_result');
-            search_result.style.display = 'block';
-            document.getElementById('include_search').textContent = search_word;
-            search_word = kanaToHira(search_word);
-            
-            for (var i = 0; i < trash_kind_list_1.length; i++) {
-                if (trash_kind_list_1[i].indexOf(search_word) != -1 || trash_kind_list_1_hiragana[i].indexOf(search_word) != -1) {
-                    let newRow = table.insertRow();
-                    let newCell = newRow.insertCell();
-                    let newCell_2 = newRow.insertCell();
-                    newCell.style.width = '190px';
-                    newCell_2.style.width = '110px';
-                    var text = document.createTextNode(trash_kind_list_1[i]);
-                    var text_2 = document.createTextNode(trash_kind_list_2[i]);
-
-                    newCell.setAttribute('id',i);
-                    if (table_rows == -1) {
-                        table_rows = i;
-                    }
-                    if (trash_kind_list_2[i] == '家電4品目' || trash_kind_list_3[i] != '') {
-                        newCell.setAttribute('class','link');
-                    }
-                    newCell.onclick = function() {
-                        if (trash_kind_list_3[this.id] != '') {
-                            alert(trash_kind_list_3[this.id]);
-                        } else if (trash_kind_list_2[this.id] == '家電4品目') {
-                            alert('市のホームページを参照してください。');
-                        }
-                    }
-                    newCell.appendChild(text);
-                    newCell_2.appendChild(text_2);
-                }
-            }
-            if (table.rows.length == 1) {
-                document.getElementById('none').textContent = 'はありませんでした。';
-                document.getElementById('search_detail').style.display = 'none';
-                document.getElementById('trash_search').style.display = 'none';
-            } else {
-                document.getElementById('none').textContent = '';
-                document.getElementById('search_detail').style.display = 'block';
-                document.getElementById('trash_search').style.display = 'block';
-            }
-            var scroll = document.getElementById(table_rows);
-            scroll.scrollIntoView({
-                block: 'end',
-                behavior: 'smooth'
-            });
-        }
-        document.getElementById('trash_kind_search').value = '';
-    }
 </script>
 <style>
 body {
@@ -395,22 +323,11 @@ option {
 button {
     font-size: 20px;
 }
-input {
-    font-size: 20px;
-    margin: 7px;
-}
-.long_title {
-    font-size: 15px;
-}
 .saturday {
     background-color: #d1e5ff;
 }
 .sunday {
     background-color: #fec3c3;
-}
-.link {
-    text-decoration: underline;
-    color: blue;
 }
 </style>
 </head>
@@ -712,21 +629,6 @@ input {
     </tr>
 </table>
 <button onclick="onemore()">住所選択画面に戻る</button>
-</div>
-<p>ごみの分別検索</p>
-<!--placeholderでテキストボックスに入力されるまで灰色の文字を表示-->
-<input type="text" id="trash_kind_search" placeholder="ごみの名前を入力">
-<button onclick="trash_kind_search()">検索</button>
-<div id="search_result">
-    <p>「<a id="include_search"></a>」を含む検索結果<a id="none"></a></p>
-    <p id="search_detail">青色のゴミの名前を押すと出し方の注意事項が表示されます</p>
-    <table id="trash_search">
-        <tr>
-            <th>品目</th>
-            <th>分別</th>
-        </tr>
-    </table>
-    <p>市のごみガイドブックは<a href="https://www.city.shibata.lg.jp/kurashi/gomi/gomi/1019342.html">こちら</a>。</p>
 </div>
 </body>
 </html>
