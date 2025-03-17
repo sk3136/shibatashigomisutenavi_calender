@@ -7,7 +7,7 @@
 <script type="text/javascript" src="kyuushibata.js"></script>
 <script type="text/javascript" src="toyoura.js"></script>
 <script>
-    // 年ごとに「syukujitu」と「moeru_possible_date」と「impossible_date」の日付を変更する(2025　syukujituのみ完了)
+    // 年ごとに「syukujitu」と「moeru_possible_date」と「impossible_date」の日付を変更する
 
     // 変数nowに現在の年月日データを入れる
     var now = new Date();
@@ -130,13 +130,13 @@
         var impossible_date = [];
         if (first == 1 && second == 3 && third == 5) {
             moeru_possible_date = [];
-            impossible_date = ['0429','1301','1303'];
+            impossible_date = ['1103','1231','1302','1411','1423','1520'];
         } else if (first == 2 && second == 4 && third == 6) {
             moeru_possible_date = [];
-            impossible_date = ['0504','1123','1231','1302','1411','1520'];
+            impossible_date = ['0429','0506','0923','1301','1303'];
         } else {
-            moeru_possible_date = ['1230','1304','1410'];
-            impossible_date = ['1231','1303','1411'];
+            moeru_possible_date = ['0428','0505','0922','1305','1521'];
+            impossible_date = ['0429','0506','0923','1302','1306','1520'];
         }
         for (var n = 0; n < moeru_possible_date.length; n++) {
             possible_Calendar[0].push(moeru_possible_date[n]);
@@ -616,6 +616,7 @@ button {
         <option value="f_9">横山</option>
         <option value="t_14">吉浦</option>
         <option value="k_15">吉田</option>
+        <!-- 米倉自治会がない -->
         <option value="d_6_2">米倉（大槻・山内・中々山を除く）</option>
         <option value="s_18">米子</option>
     </select>
@@ -630,5 +631,6 @@ button {
 </table>
 <button onclick="onemore()">住所選択画面に戻る</button>
 </div>
+<p></p>
 </body>
 </html>
