@@ -124,9 +124,9 @@
         var month_now = month;
         var date_now = date;
         possible_Calendar[0] = [];
-        // 燃えるごみの回収日の曜日が基本の曜日ではない日付
+        // 「家庭ごみ収集日程表」で燃えるごみの欄に「あり」と書かれている日付のうち基本の曜日以外に回収する日付
         var moeru_possible_date = [];
-        // 燃えるごみのなしになっている日付
+        // 「家庭ごみ収集日程表」で燃えるごみの欄に「なし」と書かれている日付
         var impossible_date = [];
         if (first == 1 && second == 3 && third == 5) {
             moeru_possible_date = [];
