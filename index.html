@@ -195,22 +195,18 @@
             possible_Calendar = Calendar_a_2;
             moeru(1, 3, 5);
         } else if (selected_area.value == 'b_3') {
-            // 不明地区多数
             possible_Calendar = Calendar_b_3;
             moeru(1, 3, 5);
         } else if (selected_area.value == 'c_4') {
             possible_Calendar = Calendar_c_4;
             moeru(2, 4, 6);
         } else if (selected_area.value == 'c_5') {
-            // 舟入 中曽根 不明
             possible_Calendar = Calendar_c_5;
             moeru(2, 4, 6);
         } else if (selected_area.value == 'd_6') {
-            // 不明地区多数
             possible_Calendar = Calendar_d_6;
             moeru(1, 3, 5);
         } else if (selected_area.value == 'd_6_2') {
-            // 米倉自治会を追加
             possible_Calendar = Calendar_d_6_2;
             moeru(2, 5, );
         } else if (selected_area.value == 'e_7') {
@@ -220,49 +216,40 @@
             possible_Calendar = Calendar_e_8;
             moeru(2, 4, 6);
         } else if (selected_area.value == 'f_9') {
-            // 不明地区多数
             possible_Calendar = Calendar_f_9;
             moeru(2, 4, 6);
         } else if (selected_area.value == 'g_10') {
-            // 不明地区多数
             possible_Calendar = Calendar_g_10;
             moeru(1, 3, 5);
         } else if (selected_area.value == 'g_11') {
             possible_Calendar = Calendar_g_11;
             moeru(1, 3, 5);
         } else if (selected_area.value == 'h_12') {
-            // 高浜 不明
             possible_Calendar = Calendar_h_12;
             moeru(2, 4, 6);
         } else if (selected_area.value == 'h_12_2') {
             possible_Calendar = Calendar_h_12_2;
             moeru(2, 5, );
         } else if (selected_area.value == 't_13') {
-            // 中之通 上中山（見城） 変更
             possible_Calendar = Calendar_t_13;
             moeru(1, 3, 5);
         } else if (selected_area.value == 't_14') {
-            // (上荒町 荒町下区) 合成？ 竹園町 不明　荒町に文章を追加
             possible_Calendar = Calendar_t_14;
             moeru(2, 4, 6);
         } else if (selected_area.value == 'k_15') {
-            // 下中 不明　(上草荷 下草荷（館野小路除く）) 合成？
             possible_Calendar = Calendar_k_15;
             moeru(1, 3, 5);
         } else if (selected_area.value == 'k_16') {
-            // 駅前 不明
             possible_Calendar = Calendar_k_16;
             moeru(2, 4, 6);
         } else if (selected_area.value == 'k_16_2') {
             possible_Calendar = Calendar_k_16_2;
             moeru(2, 5, );
         } else if (selected_area.value == 's_17') {
-            // 米子 s_18からs_17に修正
             possible_Calendar = Calendar_s_17;
             moeru(1, 3, 5);
             trash_kind = ['燃えるごみ','燃えないごみ','空き缶類','雑誌類','段ボール','空きびん、新聞、発泡スチロール','古布'];
         } else if (selected_area.value == 's_18') {
-            // 関稲 福富 下古田 上端町 下町 下端町 下浦町 七助町 不明
             possible_Calendar = Calendar_s_18;
             moeru(1, 3, 5);
             trash_kind = ['燃えるごみ','燃えないごみ','空き缶類','雑誌類','空きびん、段ボール、発泡スチロール','新聞','古布'];
@@ -351,175 +338,122 @@ button {
     <p>住所を選んでください</p>
     <select onchange="result(this)" name="area_select">
         <option>ア行</option>
+        <option value="d_6">赤谷</option>
         <option value="t_14">赤橋</option>
         <option value="k_16">朝日団地</option>
-        <option value="g_10">荒川</option>
         <option value="e_7">荒町（上端の一部）（諏訪町・中央町側）</option>
         <option value="a_1">荒町（上端の一部）（大栄町・御幸町側）</option>
-        <option value="t_14">荒町（上端の一部を除く）</option>
-        <option value="f_9">新屋敷</option>
-        <option value="b_3">飯島甲</option>
-        <option value="b_3">飯島乙</option>
-        <option value="b_3">飯島新田</option>
         <option value="t_14">池ノ端</option>
-        <option value="d_6">石喜</option>
         <option value="g_10">五十公野</option>
-        <option value="h_12">板敷</option>
         <option value="d_6_2">板山</option>
         <option value="k_15">稲荷</option>
         <option value="s_18">稲荷町</option>
         <option value="s_18">稲荷岡</option>
-        <option value="g_10">丑首</option>
-        <option value="g_10">浦</option>
-        <option value="g_10">浦新田</option>
-        <option value="g_10">江口</option>
-        <option value="g_10">大崎</option>
+        <option value="k_16">駅前</option>
         <option value="t_14">大沢</option>
         <option value="s_18">大島</option>
-        <option value="b_3">太田新田</option>
         <option value="d_6_2">大槻</option>
         <option value="c_4">大手町</option>
-        <option value="d_6">大友</option>
-        <option value="s_18">大中島</option>
         <option value="k_16">大野</option>
         <option value="k_16">岡島</option>
-        <option value="d_6">岡田</option>
         <option value="t_13">岡屋敷</option>
         <option value="s_17">小川</option>
         <option value="k_16">小国谷</option>
-        <option value="h_12">奥山新保</option>
         <option value="k_15">小島</option>
         <option value="k_15">押廻</option>
-        <option value="d_6">小戸</option>
         <option value="t_14">乙次</option>
-        <option value="g_10">小友</option>
-        <option value="g_10">小見</option>
     </select>
     <select onchange="result(this)" name="area_select">
         <option>カ行</option>
         <option value="k_16">貝塚</option>
         <option value="k_16">貝屋</option>
+        <option value="f_9">加治</option>
         <option value="t_14">加治万代</option>
         <option value="s_18">加治町</option>
-        <option value="s_18">片桐</option>
         <option value="s_18">学校町</option>
-        <option value="k_16">金沢</option>
-        <option value="f_9">金津</option>
-        <option value="k_16">金塚（下金塚を除く）</option>
-        <option value="g_10">金谷</option>
         <option value="k_16">金山</option>
         <option value="k_15">釜杭</option>
-        <option value="d_6">上赤谷</option>
-        <option value="f_9">上荒沢</option>
-        <option value="f_9">上石川</option>
+        <option value="t_14">上荒町</option>
         <option value="k_15">上今泉</option>
         <option value="s_18">上浦町</option>
-        <option value="d_6">上楠川</option>
-        <option value="f_9">上小松</option>
-        <option value="d_6">上三光</option>
-        <option value="f_9">上寺内</option>
+        <option value="k_16">上金塚</option>
         <option value="s_18">上新町</option>
-        <option value="g_10">上新保</option>
-        <option value="f_9">上館</option>
-        <option value="g_10">上内竹</option>
-        <option value="f_9">上中江</option>
-        <option value="b_3">上中沢</option>
+        <option value="k_15">上草荷</option>
         <option value="s_18">上中町</option>
-        <option value="g_10">上中山（見城地区以外）</option>
-        <option value="t_13">上中山（見城地区）</option>
+        <option value="s_18">上端町</option>
         <option value="d_6_2">上羽津</option>
+        <option value="t_13">上本田</option>
         <option value="s_18">上町</option>
+        <option value="s_18">上真中</option>
+        <option value="k_16">上横岡</option>
         <option value="s_17">河岸場</option>
         <option value="k_15">川口</option>
         <option value="k_15">川尻</option>
-        <option value="f_9">北中江</option>
-        <option value="b_3">北蓑口</option>
+        <option value="d_6">川東（板山・上羽津除く）</option>
         <option value="t_14">切梅</option>
         <option value="t_14">久保</option>
-        <option value="f_9">熊出</option>
-        <option value="f_9">蔵光</option>
-        <option value="d_6">車野</option>
-        <option value="f_9">黒岩</option>
         <option value="h_12">桑ノ口</option>
-        <option value="f_9">小出</option>
         <option value="k_15">高山寺</option>
+        <option value="t_13">興野</option>
         <option value="k_16">光陽</option>
         <option value="t_14">小坂</option>
-        <option value="s_18">古田</option>
         <option value="k_15">湖南</option>
-        <option value="h_12">小舟渡</option>
         <option value="h_12">小舟町</option>
     </select>
     <select onchange="result(this)" name="area_select">
         <option>サ行</option>
         <option value="k_16">境</option>
-        <option value="k_16">桜ヶ丘</option>
         <option value="t_14">佐々川</option>
         <option value="b_3">佐々木</option>
-        <option value="f_9">繁山</option>
+        <option value="s_18">七助町</option>
         <option value="h_12">島潟</option>
+        <option value="t_14">下荒町</option>
         <option value="t_14">下飯塚</option>
-        <option value="f_9">下石川</option>
-        <option value="f_9">下今泉</option>
+        <option value="s_18">下浦町</option>
         <option value="k_16_2">下金塚</option>
-        <option value="d_6">下楠川</option>
         <option value="k_16">下小中山</option>
-        <option value="f_9">下小松</option>
-        <option value="b_3">下興野</option>
         <option value="k_16">下坂町</option>
-        <option value="d_6">下三光</option>
-        <option value="f_9">下寺内</option>
-        <option value="k_15">下城</option>
-        <option value="g_10">下新保</option>
-        <option value="d_6">下高関</option>
-        <option value="g_10">下内竹</option>
-        <option value="f_9">下中（旧新発田市）</option>
-        <option value="k_15">下中（旧加治川村）</option>
-        <option value="f_9">下中江</option>
+        <option value="k_15">下草荷</option>
+        <option value="s_18">下古田</option>
+        <option value="k_15">下中</option>
         <option value="s_18">下中沢</option>
         <option value="t_14">下中ノ目</option>
-        <option value="f_9">下中山</option>
+        <option value="h_12">下名柄</option>
         <option value="k_16">下西山</option>
-        <option value="d_6">下羽津</option>
+        <option value="s_18">下端町</option>
+        <option value="t_13">下本田</option>
+        <option value="s_18">下町</option>
+        <option value="s_18">下真中</option>
         <option value="k_16">下山田</option>
+        <option value="k_16">下横岡</option>
         <option value="e_8">城北町</option>
         <option value="b_3">新栄町</option>
         <option value="h_12">新富町</option>
-        <option value="f_9">新保小路</option>
         <option value="f_9">菅谷</option>
-        <option value="b_3">砂山</option>
         <option value="k_16">住田</option>
-        <option value="s_18">住吉</option>
+        <option value="c_5">住吉町1丁目（10番の一部を除く）</option>
         <option value="a_2">住吉町1丁目10番の一部</option>
         <option value="a_2">住吉町2～5丁目</option>
-        <option value="c_5">住吉町1丁目（10番の一部を除く）</option>
         <option value="e_7">諏訪町</option>
-        <option value="s_18">関井</option>
+        <option value="s_18">関稲</option>
         <option value="k_15">関妻</option>
-        <option value="k_15">草荷</option>
         <option value="k_16">相馬</option>
-        <option value="b_3">曽根</option>
     </select>
     <select onchange="result(this)" name="area_select">
         <option>タ行</option>
         <option value="a_1">大栄町</option>
-        <option value="t_14">大伝</option>
-        <option value="d_6">田貝</option>
-        <option value="s_18">高島</option>
-        <option value="k_15">高田</option>
-        <option value="f_9">滝</option>
+        <option value="t_14">大伝本村</option>
+        <option value="t_14">大伝新道</option>
+        <option value="h_12">高浜</option>
         <option value="t_13">滝沢</option>
-        <option value="d_6">滝谷</option>
         <option value="t_14">竹ヶ花</option>
+        <option value="t_14">竹園町</option>
         <option value="t_14">竹俣万代</option>
         <option value="t_14">太斎</option>
-        <option value="f_9">館野小路</option>
         <option value="e_7">中央町</option>
-        <option value="s_18">長者館</option>
         <option value="k_15">塚田</option>
         <option value="t_13">月岡</option>
         <option value="t_13">月岡温泉</option>
-        <option value="d_6">敦賀</option>
         <option value="k_16">寺尾</option>
         <option value="t_13">天王</option>
         <option value="t_14">戸板沢</option>
@@ -527,40 +461,24 @@ button {
         <option value="h_12">東新町（3丁目町内会を除く）</option>
         <option value="h_12_2">東新町3丁目町内会</option>
         <option value="k_16">戸野港</option>
-        <option value="s_17">富島</option>
-        <option value="b_3">富塚</option>
         <option value="b_3">富塚町</option>
-        <option value="d_6">虎丸</option>
-        <option value="b_3">鳥穴</option>  
     </select>
     <select onchange="result(this)" name="area_select">
         <option>ナ行</option>
-        <option value="f_9">中川</option>
-        <option value="f_9">中倉</option>
-        <option value="s_18">中島</option>
         <option value="s_17">長島</option>
-        <option value="c_5">中曽根</option>
         <option value="c_5">中曽根町</option>
         <option value="h_12">中田町</option>
         <option value="k_16">中俵</option>
-        <option value="f_9">中妻</option>
-        <option value="d_6">中々山</option>
-        <option value="s_17">中野</option>
+        <option value="t_13">中之通</option>
         <option value="s_18">中町</option>
-        <option value="d_6">長峰</option>    
         <option value="t_14">中ノ目新田</option>
         <option value="h_12">長畑</option>
         <option value="h_12">中谷内</option>
         <option value="k_16">西浦</option>
         <option value="c_4">西園町</option>
         <option value="h_12">西名柄</option>
-        <option value="d_6">西姫田</option>
-        <option value="b_3">西簔口</option>
-        <option value="b_3">西宮内</option>
         <option value="k_15">二本木</option>
         <option value="k_15">野中</option>
-        <option value="b_3">則清</option>
-        <option value="b_3">則清新田</option>
         <option value="t_13">乗廻</option>
     </select>
     <select onchange="result(this)" name="area_select">
@@ -568,68 +486,41 @@ button {
         <option value="k_16">箱岩</option>
         <option value="t_13">八万</option>
         <option value="s_18">浜坂町</option>
-        <option value="f_9">早道場</option>
         <option value="t_14">万代</option>
-        <option value="h_12">東塚ノ目</option>
-        <option value="d_6">東姫田</option>
-        <option value="f_9">東宮内</option>
         <option value="s_17">人橋</option>
         <option value="k_16">平山</option>
-        <option value="b_3">日渡</option>
-        <option value="s_18">福岡</option>
+        <option value="s_18">福富</option>
         <option value="t_13">福島</option>
-        <option value="t_14">藤掛</option>
-        <option value="s_18">藤塚浜</option>
         <option value="t_14">二ツ堂</option>
         <option value="s_17">二ツ山</option>
-        <option value="c_5">舟入</option>
         <option value="c_5">舟入町1丁目1～7番</option>
         <option value="a_2">舟入町1丁目8～17番</option>
         <option value="c_5">舟入町2・3丁目</option>
-        <option value="f_9">麓</option>
         <option value="k_15">古川</option>
         <option value="k_15">古楯</option>
-        <option value="g_10">古寺</option>
         <option value="t_14">蛇塚</option>
-        <option value="g_10">法正橋</option>
-        <option value="t_13">本田</option>
         <option value="h_12">本町</option>
-        <option value="d_6">本間新田</option>
+        <option value="s_18">本真中</option>
     </select>
     <select onchange="result(this)" name="area_select">
         <option>マ行</option>
-        <option value="g_10">松岡</option>
-        <option value="s_18">真中</option>
+        <option value="g_10">松浦</option>
         <option value="s_17">真野原</option>
         <option value="s_17">真野原外</option>
         <option value="b_3">弓越（赤沼町内会）</option>
-        <option value="f_9">溝足</option>
-        <option value="g_10">瑞波</option>
-        <option value="f_9">三日市</option>
         <option value="t_13">三ツ椡</option>
         <option value="e_8">緑町</option>
-        <option value="d_6">南楯</option>
-        <option value="s_18">南成田</option>
-        <option value="d_6">宮古木</option>
-        <option value="s_17">宮吉</option>
         <option value="a_1">御幸町</option>
-        <option value="f_9">茗荷谷</option>
-        <option value="g_10">六日町</option>
         <option value="k_15">向中条</option>
     </select>
     <select onchange="result(this)" name="area_select">
         <option>ヤ行</option>
-        <option value="d_6">山内</option>
-        <option value="g_10">山崎</option>
-        <option value="g_10">八幡</option>
-        <option value="g_10">八幡新田</option>
         <option value="g_11">豊町</option>
         <option value="t_14">動木橋</option>
-        <option value="k_16">横岡</option>
-        <option value="f_9">横山</option>
+        <option value="t_14">横堀</option>
         <option value="t_14">吉浦</option>
         <option value="k_15">吉田</option>
-        <option value="d_6">米倉（大槻・山内・中々山を除く）</option>
+        <option value="d_6">米倉（大槻・米倉自治会を除く）</option>
         <option value="d_6_2">米倉自治会</option>
         <option value="s_17">米子</option>
     </select>
@@ -644,6 +535,6 @@ button {
 </table>
 <button onclick="onemore()">住所選択画面に戻る</button>
 </div>
-<p></p>
+<p style="font-size: 15px;">CC BY-SA 4.0</p>
 </body>
 </html>
